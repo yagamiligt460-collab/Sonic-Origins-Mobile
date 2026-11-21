@@ -1,0 +1,14 @@
+
+{
+  "name": "sonic-origins-mobile",
+  "version": "1.0.0",
+  "description": "Sonic fan game mobile project",
+  "scripts": {
+    "start": "vite --host 0.0.0.0",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vite": "*"
+  },
+  "devDependencies": {}
+}
