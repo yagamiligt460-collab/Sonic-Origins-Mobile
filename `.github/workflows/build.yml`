@@ -1,5 +1,5 @@
 
-name: Build Android APK
+name: Build Sonic Origins APK
 
 on:
   workflow_dispatch:
@@ -26,8 +26,27 @@ jobs:
       - name: Build web app
         run: npm run build
 
-      - name: Upload website
+      - name: Prepare APK
+        run: |
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap add android
+          npx cap sync android
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Build Android APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: sonic-origins-web
-          path: dist/
+          name: Sonic-Origins-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
